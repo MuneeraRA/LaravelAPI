@@ -17,21 +17,19 @@ use Illuminate\Support\Facades\Route;
 Route::post('login', 'UserController@login');
 Route::post('register', 'UserController@register');
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
+// Needs Auth user  
 Route::middleware('auth:api')->group(function () {
-    Route::get('user', 'UserController@details');
-    Route::get('store', 'UserController@store');
-    Route::get('products', 'UserController@products');
-    Route::post('add', 'UserController@add_product');
-    // Route::resource('products', 'ProductController');
+    Route::get('/user/profile', 'UserController@details');
+    Route::get('/user/store', 'UserController@store');
+    Route::get('/user/store/products', 'UserController@products');
+    Route::post('/user/store/add_product', 'UserController@add_product');
 });
 
 // Guest API
-Route::get('new_cart', 'GuestController@create_cart');
-Route::get('add_product', 'GuestController@add_product');
-Route::get('view_cart', 'GuestController@view_cart');
+Route::get('/guest/new_cart', 'GuestController@create_cart');
+Route::get('/guest/add_product', 'GuestController@add_product');
+Route::get('/guest/view_cart', 'GuestController@view_cart');
 
-
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});

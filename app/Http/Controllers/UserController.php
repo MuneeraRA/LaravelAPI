@@ -134,13 +134,12 @@ public function add_product(Request $request){
         $product['price'] = (float) $request['price'];
         $product = Product::create($product);
         $store->products;
-        $response['user'] = $user;
         $response['store'] = $store;
         return response()->json([
             'success' => true,
             'message' => 'Product added Succesfuly',
             'response' => $response
-        ] , $this->failerStatus);
+        ] , $this->successStatus);
 
     }
 }
