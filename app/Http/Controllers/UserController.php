@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller {
 
 public $successStatus = 200;
-public $failerStatus = 401;
+public $badRequestStatus = 401;
+public $permissionsErrorStatus = 403;
 
 public function register(Request $request) {
     $validator = Validator::make($request->all(), [ 
@@ -20,17 +21,17 @@ public function register(Request $request) {
     if ($validator->fails()) { 
         $fail['error'] = $validator->errors();
         $fail['success'] = false;
-        return response()->json($fail, $this-> failerStatus);}
+        return response()->json($fail, $this-> badRequestStatus);}
     if ($user = User::where('name', $request['name'])->first())
         return response()->json([
             'success' => false,
             'error' => 'User with name '. $request['name'] .' is already registered'
-        ], $this-> failerStatus);
+        ], $this-> badRequestStatus);
     if ($user = User::where('email', $request['email'])->first())
         return response()->json([
             'success' => false,
             'error' => 'User with email '. $request['email'] .' is already registered'
-        ], $this-> failerStatus);
+        ], $this-> badRequestStatus);
     $input['name'] = $request['name'];
     $input['email'] = $request['email'];
     $input['password'] = bcrypt($request['password']); 
@@ -87,7 +88,7 @@ public function login(Request $request)
     } else {
         return response()->json([
             'success' => false,
-            'error' => 'Un-Authorised'], $this->failerStatus);
+            'error' => 'Un-Authorised'], $this->badRequestStatus);
     }
 }
 
@@ -99,7 +100,7 @@ public function login(Request $request)
 public function details(){
     return response()->json([
         'success' => true,
-        'user' => auth()->user()], $this->failerStatus);}
+        'user' => auth()->user()], $this->badRequestStatus);}
 
 public function store(){
     $store = auth()->user()->store;
@@ -116,17 +117,17 @@ public function add_product(Request $request){
         return response()->json([
             'success' => false,
             'error' => 'Store with id ' . $user['id'] . ' not found'
-        ], $this-> failerStatus);
+        ], $this-> badRequestStatus);
     } else{
 
         $validator = Validator::make($request->all(), [ 
-            'name' => 'required', 
+            'product_name' => 'required', 
             'price' => 'required', 
         ]);
         if ($validator->fails()) { 
             $fail['error'] = $validator->errors();
             $fail['success'] = false;
-            return response()->json($fail, $this->failerStatus); }
+            return response()->json($fail, $this->badRequestStatus); }
 
         $product['store_id'] = $store['id'];
         $product['product_name'] = $request['name'];
@@ -152,13 +153,13 @@ public function products(){
         return response()->json([
             'success' => false,
             'error' => 'Store with id ' . $user['id'] . ' not found'
-        ], $this->failerStatus);
+        ], $this->badRequestStatus);
     } else{
         $response['store'] = $store;
         return response()->json([
             'success' => true,
             'response' => $response
-        ] , $this->failerStatus);
+        ] , $this->badRequestStatus);
 
     }
 }
