@@ -9,7 +9,7 @@ use App\CartProducts;
 class GuestController extends Controller
 {
     public $successStatus = 200;
-    public $failerStatus = 401;
+    public $badRequestStatus = 401;
 
     public function create_cart(){
         $cart = Cart::create();
@@ -29,13 +29,13 @@ class GuestController extends Controller
             return response()->json([
                 'success' => false,
                 'error' => 'Cart with id'. $request['cart_id'] .' not found'
-            ], $this->failerStatus);
+            ], $this->badRequestStatus);
         
         if (!Product::find($request['product_id']))
         return response()->json([
             'success' => false,
             'error' => 'Product with id '. $request['product_id'] .' not found'
-        ], $this->failerStatus);
+        ], $this->badRequestStatus);
 
         $cart = CartProducts::create($cart);
         
@@ -44,7 +44,7 @@ class GuestController extends Controller
             return response()->json([
                 'success' => false,
                 'error' => 'Un-able to add products'
-            ], $this->failerStatus);
+            ], $this->badRequestStatus);
         } else{
         $cart = Cart::find($request['cart_id']);
         $cart->products;
@@ -63,7 +63,7 @@ class GuestController extends Controller
             return response()->json([
                 'success' => false,
                 'error' => 'Cart with id ' . $request['cart_id'] . ' not found'
-            ], $this->failerStatus);
+            ], $this->badRequestStatus);
         } else{
             $cart->products;
             $response['cart'] = $cart;
