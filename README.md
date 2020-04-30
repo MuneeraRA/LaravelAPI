@@ -1,7 +1,7 @@
 
 ## About Project
 
-It is a simple e-commerce web application provide quice functionality for merchent to create a store and add products to it, quest can add product and view thier cart.
+It is a simple e-commerce web application provide quice functionality for merchent to create a store and add products to his store, guest can add product and view thier cart.
 
 
 ## ER Daigram 
