@@ -130,7 +130,7 @@ public function add_product(Request $request){
             return response()->json($fail, $this->badRequestStatus); }
 
         $product['store_id'] = $store['id'];
-        $product['product_name'] = $request['name'];
+        $product['product_name'] = $request['product_name'];
         $product['description'] = $request['description'];
         $product['price'] = (float) $request['price'];
         $product = Product::create($product);
