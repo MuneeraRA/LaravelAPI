@@ -18,14 +18,14 @@ It is a simple e-commerce web application provide quice functionality for merche
 ## Routs
 
 
-- **[POST](/login)**
-- **[POST](/register)**
-- **[GET](/user/profile)**
-- **[GET](/user/store)**
-- **[GET](/user/store/products)**
-- **[POST](/user/store/add_product)**
-- **[GET](/guest/new_cart)**
-- **[GET](/guest/add_product)**
-- **[GET](/guest/view_cart)**
+- [POST](/login)
+- [POST](/register)
+- [GET](/user/profile)
+- [GET](/user/store)
+- [GET](/user/store/products)
+- [POST](/user/store/add_product)
+- [GET](/guest/new_cart)
+- [GET](/guest/add_product)
+- [GET](/guest/view_cart)
 
 
