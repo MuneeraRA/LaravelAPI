@@ -6,16 +6,18 @@ use Illuminate\Support\Facades\Validator;
 use App\User; 
 use App\Store;
 use App\Product;
+use Illuminate\Support\Facades\Auth; 
 use Config;
 use App\Helpers\AppHelper as Helper;
 
-use Illuminate\Support\Facades\Auth; 
 class UserController extends Controller {
 
 
 public function register(Request $request) 
 {
-    $user = User::create($this->validateUserRegister()); 
+    $user = new User($this->validateUserRegister());
+    $user->password = bcrypt(request('password'));
+    $user->save(); 
     $token =  $user->createToken('MyApp')-> accessToken; 
     $response['name'] = $user['name'];
     $response['email'] = $user['email'];
@@ -28,13 +30,10 @@ public function login(Request $request)
 {   
     if (auth()->attempt($this->validateUserLogin())) {
         $user = auth()->user();
-        $store = $user->store;
-        $store->products;
         $token = auth()->user()->createToken('TutsForWeb')->accessToken;
         $response['name'] = $user['name'];
         $response['email'] = $user['email'];
         $response['token'] = $token;
-        $response['store'] = $store;
         return Helper::buildResponse($response,true,
         Config::get('constants.status_codes.success') );
     } else {
