@@ -18,6 +18,7 @@ class CreateCartProductsTable extends Migration
             $table->unsignedBigInteger('cart_id');
             $table->unsignedBigInteger('product_id');
             $table->timestamps();
+            $table->unique(['cart_id','product_id']);
             $table->foreign('cart_id')->references('id')->on('carts')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
         });

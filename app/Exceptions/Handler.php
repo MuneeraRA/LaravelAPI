@@ -50,6 +50,9 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        if ($exception instanceof NotFoundHttpException){
+            return response()->json(['error' => 'Not Found'], Config::get('constants.status_codes.not_found'));
+        }
         return parent::render($request, $exception);
     }
 }

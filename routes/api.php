@@ -19,16 +19,24 @@ Route::post('register', 'UserController@register');
 
 // Needs Auth user  
 Route::middleware('auth:api')->group(function () {
-    Route::get('/user/profile', 'UserController@details');
-    Route::get('/user/store', 'UserController@store');
-    Route::get('/user/store/products', 'UserController@products');
-    Route::post('/user/store/add_product', 'UserController@add_product');
+    Route::get('/user/profile', 'UserController@show');
+    Route::get('/user/store', 'StoreController@showUserStore');
+    Route::post('/user/store', 'StoreController@store');
+    Route::put('/user/store', 'StoreController@update');
+    Route::post('/store/products', 'ProductController@store');
+
 });
 
+Route::get('stores', 'StoreController@index');
+Route::get('/stores/{store}', 'StoreController@show');
+
 // Guest API
-Route::get('/guest/new_cart', 'GuestController@create_cart');
-Route::get('/guest/add_product', 'GuestController@add_product');
-Route::get('/guest/view_cart', 'GuestController@view_cart');
+Route::get('/cart', 'CartController@create');
+Route::get('/cart/add', 'CartController@add_product');
+Route::get('/cart/{cart}', 'CartController@show');
+Route::delete('/cart/{cart}', 'CartController@destroy');
+
+
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
