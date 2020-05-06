@@ -18,16 +18,16 @@ class CartController extends Controller
     public function show(Cart $cart)
     {   
         $cart = Cart::find($cart)->first();
-        if($cart){
-        $cart->products;
-        $response['cart'] = $cart;
-        return Helper::buildResponse($response,true,
-        Config::get('constants.status_codes.success') );
-        }else{
-        throw new \App\Exceptions\NotFoundException();
-        $response['message'] = "Cart Not found";
-        return Helper::buildResponse($response,false,
-        Config::get('constants.status_codes.bad_request') );}
+        try 
+        {
+            $cart->products;
+            $response['cart'] = $cart;
+            return Helper::buildResponse($response,true,
+            Config::get('constants.status_codes.success') );
+        } catch (\Throwable $ex) 
+        {
+            throw new \App\Exceptions\NotFoundException();
+        }
         
     }
     

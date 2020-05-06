@@ -29,14 +29,16 @@ class StoreController extends Controller
         }
     }
 
-    public function show($store) {
-        $store = Store::find($store)->first();
-        if ($store){
-        $store->user;
-        $store->products;
-        return Helper::buildResponse($store,true,
-        Config::get('constants.status_codes.success') );
-        } else{
+    public function show($store) 
+    {
+        try 
+        {
+            $store = Store::find($store)->first();
+            $store->user;
+            $store->products;
+            return Helper::buildResponse($store,true,
+            Config::get('constants.status_codes.success') );
+        } catch (\Throwable $ex) {
             throw new \App\Exceptions\StoreNotFoundException();
         }
     }
