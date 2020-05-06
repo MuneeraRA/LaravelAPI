@@ -53,14 +53,16 @@ class CartController extends Controller
     }
     public function destroy(Cart $cart)
     {
-        if($cart->delete()){
+        try
+        {
+            $cart->delete();
             $response['message'] = "Deleted";
             return Helper::buildResponse($response,true,
             Config::get('constants.status_codes.success') );
-        } else {
-        $response['message'] = "Error while deleting";
-        return Helper::buildResponse($response,false,
-        Config::get('constants.status_codes.bad_request') );}
+        } catch (\Throwable $ex) 
+        {
+            throw new \App\Exceptions\NotFoundException();
+        }
     }
 
     protected function validateProduct()
