@@ -46,7 +46,7 @@ class CartController extends Controller
     {
         $this->validateProduct();
         $cart = Cart::where('id',request('cart_id'))->firstOrFail();
-        $cart->products()->attach(request('product_id'));
+        $cart->products()->syncWithoutDetaching(request('product_id'));
         $cart->products;
         $response['cart'] = $cart;
         return Helper::buildResponse($response,true,
