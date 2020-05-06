@@ -15,11 +15,11 @@ class CartController extends Controller
         return $carts;
     }
 
-    public function show(Cart $cart)
+    public function show($cart)
     {   
-        $cart = Cart::find($cart)->first();
         try 
-        {
+        {   
+            $cart = Cart::find($cart)->first();
             $cart->products;
             $response['cart'] = $cart;
             return Helper::buildResponse($response,true,

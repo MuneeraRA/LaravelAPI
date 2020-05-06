@@ -1,11 +1,11 @@
 <?php
  
 namespace App\Exceptions;
-
+ 
 use Exception;
 use Config;
  
-class FailedLoginException extends Exception
+class NotFoundException extends Exception
 {
     /**
      * Report the exception.

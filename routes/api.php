@@ -26,7 +26,6 @@ Route::middleware('auth:api')->group(function () {
 });
 // Guest API
 Route::get('stores', 'StoreController@index');
-Route::get('/stores/{store}', 'StoreController@show');
 Route::get('/stores/{store}/products', 'StoreController@show');
 Route::get('/cart', 'CartController@create');
 Route::get('/carts/add', 'CartController@add_product');
