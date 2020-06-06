@@ -14,20 +14,3 @@ It is a simple e-commerce web application provide quice functionality for merche
 [ https://imuneerah.com/api ]
 [documentation] #PostMan_collection (https://drive.google.com/open?id=15Z78EoJTjWoDeHL3HW2jet77cabMKVzX) 
 
-
-## Routs
-
-Merchant : 
-    - POST (/login)
-    - POST(/register)
-    - GET (/user/profile)
-    - GET (/user/store)
-    - GET (/user/store/products)
-    - POST (/user/store/add_product)
-    
-Quest : 
-    - GET (/guest/new_cart)
-    - GET (/guest/add_product)
-    - GET (/guest/view_cart)
-
-
