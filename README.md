@@ -12,5 +12,5 @@ It is a simple e-commerce web application provide quick functionality for merche
 ## Deploy API
 
 [ https://imuneerah.com/api ]
-[documentation] #PostMan_collection (https://drive.google.com/open?id=15Z78EoJTjWoDeHL3HW2jet77cabMKVzX) 
+[documentation] #PostMan_collection (https://drive.google.com/file/d/1L8EzerCH1_nfmAP-sm8b3qE_qNQ4bf2G/view?usp=sharing) 
 
